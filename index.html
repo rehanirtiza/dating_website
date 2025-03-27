@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kya tum mere saath date pe chalogi?💖</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Parisienne&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        body {
+            font-family: 'Dancing Script', cursive;
+            background: linear-gradient(
+                -45deg, 
+                #FF6B6B, 
+                #4ECDC4, 
+                #45B7D1, 
+                #FDCB6E, 
+                #6C5CE7, 
+                #FF69B4
+            );
+            background-size: 400% 400%;
+            animation: multiColorBackground 15s ease infinite;
+            overflow: hidden;
+            margin: 0;
+            height: 100vh;
+        }
+
+        @keyframes multiColorBackground {
+            0% { background-position: 0% 50%; }
+            25% { background-position: 100% 30%; }
+            50% { background-position: 50% 100%; }
+            75% { background-position: 0% 70%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .heart-rain {
+            position: fixed;
+            top: -100px;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: rgba(255, 105, 180, 0.7);
+            animation: fall linear infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .romantic-container {
+            position: relative;
+            z-index: 10;
+        }
+
+        .content-box {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .glossy-btn {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, 
+                rgba(255,255,255,0.2) 0%, 
+                rgba(255,255,255,0) 50%, 
+                rgba(0,0,0,0.1) 100%
+            );
+            box-shadow: 
+                0 10px 20px rgba(0,0,0,0.1),
+                0 4px 6px rgba(0,0,0,0.05),
+                inset 0 2px 4px rgba(255,255,255,0.3);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .glossy-btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(
+                circle at top left, 
+                rgba(255,255,255,0.4) 0%, 
+                rgba(255,255,255,0) 50%
+            );
+            transform: rotate(-45deg);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .glossy-btn:hover::before {
+            opacity: 1;
+        }
+
+        .glossy-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 
+                0 15px 25px rgba(0,0,0,0.15),
+                0 5px 8px rgba(0,0,0,0.08),
+                inset 0 2px 4px rgba(255,255,255,0.4);
+        }
+
+        .yes-btn-gradient {
+            background: linear-gradient(135deg, #FF69B4, #FF1493, #C71585);
+            background-size: 200% 200%;
+            animation: gradientAnimation 5s ease infinite;
+        }
+
+        .no-btn-gradient {
+            background: linear-gradient(135deg, #9400D3, #4B0082, #8A2BE2);
+            background-size: 200% 200%;
+            animation: gradientAnimation 5s ease infinite;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center">
+    <div id="heart-rain" class="heart-rain"></div>
+
+    <div class="content-box text-center z-10">
+        <h1 class="text-5xl font-bold text-pink-600 mb-8">
+             kya tum mere saath date pe chalogi?
+        </h1>
+        
+        <img src="./download.jpg" alt="Sticker" class="mx-auto mb-10 w-64 h-64 object-cover rounded-full">
+        
+        <div class="flex justify-center items-center gap-6">
+            <button id="yesBtn" 
+                class="glossy-btn yes-btn-gradient text-white font-bold py-4 px-10 rounded-full text-xl">
+                Yes, I Will! 💖
+            </button>
+            <button id="noBtn" 
+                class="glossy-btn no-btn-gradient text-white font-bold py-4 px-10 rounded-full text-xl">
+                No Way 😅
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function createHeartRain() {
+            const heartRain = document.getElementById('heart-rain');
+            
+            // Create multiple hearts
+            for (let i = 0; i < 100; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '❤️';
+                
+                // Randomize heart properties
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 5 + 3) + 's';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                
+                heartRain.appendChild(heart);
+            }
+
+            // Remove old hearts periodically
+            setTimeout(() => {
+                heartRain.innerHTML = '';
+                createHeartRain();
+            }, 10000);
+        }
+
+        // Start heart rain
+        createHeartRain();
+
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        let scale = 1;
+        
+        noBtn.addEventListener('click', () => {
+            scale += 0.3;
+            yesBtn.style.transform = `scale(${scale})`;
+            
+            // Playful shake animation
+            gsap.to(noBtn, {
+                x: "+=15",
+                rotation: 10,
+                duration: 0.1,
+                yoyo: true,
+                repeat: 5
+            });
+        });
+        
+        yesBtn.addEventListener('click', () => {
+            // Smooth transition effect
+            gsap.to('body', {
+                opacity: 0,
+                duration: 1,
+                onComplete: () => {
+                    window.location.href = 'date.html';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
